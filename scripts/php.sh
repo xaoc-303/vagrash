@@ -9,7 +9,11 @@ sudo apt-get -qq -y update
 sudo add-apt-repository ppa:ondrej/php5 -y > /dev/null
 sudo apt-get -qq -y update
 
-sudo apt-get -y install php5 php5-fpm php5-dev php5-cli php5-curl php5-mcrypt php5-mysql php5-pgsql php-mail php5-memcached > /dev/null
+sudo apt-get -y install php5 php5-fpm php5-dev \
+php5-cli php5-curl php5-mcrypt php5-json \
+php5-mysql php5-pgsql \
+php5-gd php-mail php5-memcached php5-xdebug > /dev/null
+
 sudo apt-get -qq -y update
 
 # sudo sh -c "sed -i '/memory_limit/s/128M/512M/' /etc/php5/cli/php.ini"

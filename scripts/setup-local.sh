@@ -15,13 +15,15 @@ if ! test -f "/var/www/${HOST_NAME}/public/temp/adminer.php"; then wget -O /var/
 
 cd /var/www/${HOST_NAME}
 
+echo "download php-cs-fixer"
+if ! test -f "php-cs-fixer.phar"; then wget http://get.sensiolabs.org/php-cs-fixer.phar > /dev/null;fi
+
+# ------------------------------
+
 echo "set local values"
 if ! test -f ".env.local.php"; then
     cp .env.example.php .env > /dev/null
 fi
-
-echo "download php-cs-fixer"
-if ! test -f "php-cs-fixer.phar"; then wget http://get.sensiolabs.org/php-cs-fixer.phar > /dev/null;fi
 
 echo "composer update"
 composer update > /dev/null

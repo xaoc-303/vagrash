@@ -44,6 +44,7 @@ sudo sh -c "sed -i '/upload_max_filesize/s/2M/2000M/' /etc/php5/cli/php.ini"
 
 sudo php5enmod mcrypt
 sudo a2enmod rewrite
+sudo a2enmod headers
 
 sudo cat - > mailcatcher.${HOST_NAME}.conf <<EOF
 <VirtualHost *:80>

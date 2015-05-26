@@ -18,6 +18,7 @@ sudo cat - > ${DOMAIN}.conf <<EOF
         #Deny from all
         #Allow from 127.0.0.1
         Allow from All
+        Require all granted
         #If you want to allow access from your internal network
         # For specific ip addresses add one line per ip address
         #Allow from 192.168.0.100
