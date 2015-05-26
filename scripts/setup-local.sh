@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+echo "------------------------------"
+echo "extension local environment"
+echo "------------------------------"
+
+HOST_NAME=$1
+
+cd /var/www/${HOST_NAME}
+
+echo "set local values"
+# if ! test -f ".env.local.php"; then cp .env.example.php .env.local.php > /dev/null;fi
+if ! test -f ".env"; then
+    cp .env.example.php .env > /dev/null
+    #
+fi
+
+echo "download php-cs-fixer"
+if ! test -f "php-cs-fixer.phar"; then wget http://get.sensiolabs.org/php-cs-fixer.phar > /dev/null;fi
+
+echo "composer update"
+composer update > /dev/null
+
+echo "ide-helper:generate"
+php artisan ide-helper:generate
+
+echo "migrate:install"
+php artisan migrate:install
+
+echo "migrate:refresh"
+php artisan migrate:refresh
+
+echo "db:seed"
+php artisan db:seed
