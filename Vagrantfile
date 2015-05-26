@@ -89,7 +89,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.provision :shell, path: "#{github_url}/scripts/queue-install.sh"
   # config.vm.provision :shell, path: "#{github_url}/scripts/queue-add.sh", args: ['default']
   config.vm.provision :shell, path: "#{github_url}/scripts/setup-after.sh", args: [hostname]
-  # config.vm.provision :shell, :path => "#{github_url}/scripts/setup-local.sh", args: [hostname]
+  config.vm.provision :shell, path: "#{github_url}/scripts/setup-local-download.sh", args: [hostname, github_url]
+  # config.vm.provision :shell, :path => "setup-local.sh", args: [hostname]
 
   # Enable provisioning with CFEngine. CFEngine Community packages are
   # automatically installed. For example, configure the host as a
