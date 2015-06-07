@@ -17,7 +17,7 @@ if ! test -f ".env.local.php"; then
 fi
 
 echo "composer update"
-composer update > /dev/null
+composer update --no-progress > /dev/null
 
 echo "ide-helper:generate"
 php artisan ide-helper:generate

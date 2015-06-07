@@ -7,7 +7,8 @@ LARAVEL_VERSION=$2
 
 if [ ! -f "/var/www/${HOST_NAME}/composer.json" ]; then
     # project directory must be empty, so...
-    composer create-project laravel/laravel=${LARAVEL_VERSION} /var/www/${HOST_NAME}-temp --prefer-dist
+    mkdir -p /var/www/${HOST_NAME}-temp
+    composer create-project laravel/laravel=${LARAVEL_VERSION} /var/www/${HOST_NAME}-temp --prefer-dist --no-progress
     cp -r /var/www/${HOST_NAME}-temp/* /var/www/${HOST_NAME}/
     rm -rf /var/www/${HOST_NAME}-temp
     cd /var/www/${HOST_NAME}
@@ -20,8 +21,9 @@ return array(
     'DATABASE_PASSWORD' => 'pass'
 );
 EOF
-    composer clear-cache
-    composer update
+    rm -rf vendor/compiled.php
+    # composer clear-cache
+    # composer update
 fi
 
 mkdir -p /var/www/${HOST_NAME}/public/temp

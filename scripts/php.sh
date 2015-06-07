@@ -22,10 +22,3 @@ sudo apt-get -qq -y update
 sudo sh -c "sed -i '/short_open_tag/s/Off/On/g' /etc/php5/fpm/php.ini"
 
 sudo service php5-fpm restart
-
-echo "------------------------------"
-echo "composer"
-echo "------------------------------"
-
-curl -s https://getcomposer.org/installer | php
-sudo mv composer.phar /usr/local/bin/composer
