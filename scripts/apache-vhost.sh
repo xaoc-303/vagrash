@@ -8,7 +8,7 @@ HOST_NAME=$1
 DOMAIN=$2
 
 sudo cat - > ${DOMAIN}.conf <<EOF
-<VirtualHost *:80>
+<VirtualHost *:80 *:8000>
     DocumentRoot "/var/www/${HOST_NAME}/public"
     ServerName ${DOMAIN}
     Options Indexes FollowSymLinks

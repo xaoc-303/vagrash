@@ -4,6 +4,8 @@ echo "------------------------------"
 echo "mail, sendmail, mailcatcher"
 echo "------------------------------"
 
+HOST_NAME=$1
+
 sudo apt-get -y install php-mail sendmail sasl2-bin mailutils > /dev/null
 sudo apt-get -qq -y update
 
@@ -41,6 +43,24 @@ sudo initctl reload-configuration
 # sudo sh -c "sed -i '/;sendmail_path/s/;sendmail_path =/sendmail_path = \/usr\/bin\/env \/usr\/local\/bin\/catchmail/' /etc/php5/fpm/php.ini"
 echo "sendmail_path = /usr/bin/env $(which catchmail)" | sudo tee /etc/php5/mods-available/mailcatcher.ini
 sudo php5enmod mailcatcher
+
+sudo cat - > mailcatcher.${HOST_NAME}.conf <<EOF
+<VirtualHost *:80>
+    ServerName mailcatcher.${HOST_NAME}
+    <Proxy *>
+        Order deny,allow
+        Allow from all
+    </Proxy>
+    ProxyRequests Off
+    ProxyPassReverse / http://127.0.0.1:1080/
+    ProxyPass / http://127.0.0.1:1080/
+    ProxyPreserveHost Off
+</VirtualHost>
+EOF
+sudo mv mailcatcher.${HOST_NAME}.conf /etc/apache2/sites-available
+sudo a2ensite mailcatcher.${HOST_NAME}
+# sudo ln -s /etc/apache2/sites-available/mailcatcher.${HOST_NAME}.conf /etc/apache2/sites-enabled/mailcatcher.${HOST_NAME}.conf
+
 sudo service apache2 restart
 # sudo sh -c "sed -i '/;sendmail_path/s/;sendmail_path =/sendmail_path = \/usr\/sbin\/sendmail -t -i/' /etc/php5/fpm/php.ini"
 sudo service php5-fpm restart
