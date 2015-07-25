@@ -4,7 +4,7 @@
 # Config Github Settings
 github_username = "xaoc-303"
 github_repo     = "vagrash"
-github_branch   = "master"
+github_branch   = "1.0.0"
 github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
 
 # https://github.com/settings/tokens
