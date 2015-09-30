@@ -14,9 +14,9 @@ echo "------------------------------"
 sudo apt-get -qq -y update
 
 echo "------------------------------"
-echo "mc curl nmap htop ssh openssh-server git-core"
+echo "mc curl nmap htop ssh openssh-server git-core zip"
 echo "------------------------------"
 
 sudo sh -c "sed -i 's/# set const/set const/' /etc/nanorc"
-sudo apt-get -y install mc curl nmap htop ssh openssh-server git-core > /dev/null
+sudo apt-get -y install mc curl nmap htop ssh openssh-server git-core zip > /dev/null
 sudo apt-get -qq -y update

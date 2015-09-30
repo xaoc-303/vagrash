@@ -4,7 +4,7 @@
 # Config Github Settings
 github_username = "xaoc-303"
 github_repo     = "vagrash"
-github_branch   = "1.1.0"
+github_branch   = "1.1.1"
 github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
 
 # https://github.com/settings/tokens
@@ -97,7 +97,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.provision :shell, path: "#{github_url}/scripts/queue-add.sh", args: ['default']
   config.vm.provision :shell, path: "#{github_url}/scripts/setup-after.sh", args: [hostname]
   config.vm.provision :shell, path: "#{github_url}/scripts/composer.sh", args: [github_token]
+  # config.vm.provision :shell, path: "#{github_url}/scripts/envoy.sh"
   # config.vm.provision :shell, path: "#{github_url}/scripts/laravel.sh", args: [hostname, '5.1.*']
+  # config.vm.provision :shell, path: "#{github_url}/scripts/npm.sh"
   config.vm.provision :shell, path: "#{github_url}/scripts/setup-local-download.sh", args: [hostname, github_url]
   # config.vm.provision :shell, :path => "setup-local.sh", args: [hostname]
 
