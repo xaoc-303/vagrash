@@ -25,16 +25,3 @@ EOF
     # composer clear-cache
     # composer update
 fi
-
-if test -d /var/www/$HOST_NAME
-    then
-
-    cd /var/www/$HOST_NAME
-    echo "download php-cs-fixer"
-    if ! test -f "php-cs-fixer.phar"; then wget http://get.sensiolabs.org/php-cs-fixer.phar > /dev/null;fi
-
-    mkdir -p public/temp && cd public/temp
-    echo "download adminer"
-    if ! test -f "adminer.php"; then wget -O adminer.php https://www.dropbox.com/s/d9pt98r6mj69c7s/adminer-4.2.1.php > /dev/null;fi
-
-fi

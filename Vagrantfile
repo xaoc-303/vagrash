@@ -4,7 +4,7 @@
 # Config Github Settings
 github_username = "xaoc-303"
 github_repo     = "vagrash"
-github_branch   = "1.1.1"
+github_branch   = "1.1.2"
 github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
 
 # https://github.com/settings/tokens
@@ -24,6 +24,8 @@ mysql_enable_remote   = "true"
 postgresql_root_password   = "pass"
 postgresql_database_name   = "vagrash"
 postgresql_enable_remote   = "true"
+
+public_folder = "/public"
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
@@ -89,9 +91,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.provision :shell, path: "#{github_url}/scripts/mysql.sh", args: [mysql_root_password, mysql_database_name, mysql_enable_remote]
   # config.vm.provision :shell, path: "#{github_url}/scripts/postgresql.sh", args: [postgresql_root_password, postgresql_database_name, postgresql_enable_remote]
   config.vm.provision :shell, path: "#{github_url}/scripts/apache.sh"
-  config.vm.provision :shell, path: "#{github_url}/scripts/apache-vhost.sh", args: [hostname, hostname]
-  # config.vm.provision :shell, path: "#{github_url}/scripts/apache-vhost.sh", args: [hostname, "admin.#{hostname}"]
-  # config.vm.provision :shell, path: "#{github_url}/scripts/apache-vhost.sh", args: [hostname, "api.#{hostname}"]
+  config.vm.provision :shell, path: "#{github_url}/scripts/apache-vhost.sh", args: [hostname, hostname, public_folder]
+  # config.vm.provision :shell, path: "#{github_url}/scripts/apache-vhost.sh", args: [hostname, "admin.#{hostname}", public_folder]
+  # config.vm.provision :shell, path: "#{github_url}/scripts/apache-vhost.sh", args: [hostname, "api.#{hostname}", public_folder]
   # config.vm.provision :shell, path: "#{github_url}/scripts/mailcatcher.sh", args: [hostname]
   # config.vm.provision :shell, path: "#{github_url}/scripts/queue-install.sh"
   # config.vm.provision :shell, path: "#{github_url}/scripts/queue-add.sh", args: ['default']
@@ -99,6 +101,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, path: "#{github_url}/scripts/composer.sh", args: [github_token]
   # config.vm.provision :shell, path: "#{github_url}/scripts/envoy.sh"
   # config.vm.provision :shell, path: "#{github_url}/scripts/laravel.sh", args: [hostname, '5.1.*']
+  config.vm.provision :shell, path: "#{github_url}/scripts/adminer.sh", args: [hostname, public_folder]
+  config.vm.provision :shell, path: "#{github_url}/scripts/phpunit.sh", args: [hostname]
   # config.vm.provision :shell, path: "#{github_url}/scripts/npm.sh"
   config.vm.provision :shell, path: "#{github_url}/scripts/setup-local-download.sh", args: [hostname, github_url]
   # config.vm.provision :shell, :path => "setup-local.sh", args: [hostname]

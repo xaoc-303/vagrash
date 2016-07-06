@@ -6,13 +6,14 @@ echo "------------------------------"
 
 HOST_NAME=$1
 DOMAIN=$2
+PUBLIC_FOLDER=$3
 
 sudo cat - > ${DOMAIN}.conf <<EOF
 <VirtualHost *:80 *:8000>
-    DocumentRoot "/var/www/${HOST_NAME}/public"
+    DocumentRoot "/var/www/${HOST_NAME}${PUBLIC_FOLDER}"
     ServerName ${DOMAIN}
     Options Indexes FollowSymLinks
-    <Directory "/var/www/${HOST_NAME}/public/">
+    <Directory "/var/www/${HOST_NAME}${PUBLIC_FOLDER}/">
         AllowOverride All
         Order Deny,Allow
         #Deny from all
